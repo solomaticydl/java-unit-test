@@ -4,15 +4,12 @@ public class AuthenticationService {
 
     private final IProfile profileDao;
     private final IToken rsaToken;
+    private final INotification notification;
 
-    public AuthenticationService(IProfile profileDao, IToken rsaToken) {
+    public AuthenticationService(IProfile profileDao, IToken rsaToken, INotification notification) {
         this.profileDao = profileDao;
         this.rsaToken = rsaToken;
-    }
-
-    public AuthenticationService() {
-        profileDao = new ProfileDao();
-        rsaToken = new RsaTokenDao();
+        this.notification = notification;
     }
 
     public boolean isValid(String account, String password) {
@@ -29,6 +26,7 @@ public class AuthenticationService {
         if (isValid) {
             return true;
         } else {
+            notification.sendNotify(String.format("account:%s try to login failed", account));
             return false;
         }
     }
