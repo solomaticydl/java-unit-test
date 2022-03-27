@@ -23,8 +23,20 @@ public class HolidayTest {
     }
 
     @Test
+    public void today_is_xmas_when_Dec_24() {
+        givenToday(12, 24);
+        sayHelloShouldBe("Merry Christmas");
+    }
+
+    @Test
     public void today_is_not_xmas() {
         givenToday(11, 25);
+        sayHelloShouldBe("Today is not Christmas");
+    }
+
+    @Test
+    public void today_is_not_xmas_when_Nov_24() {
+        givenToday(11, 24);
         sayHelloShouldBe("Today is not Christmas");
     }
 
