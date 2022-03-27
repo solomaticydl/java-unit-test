@@ -33,6 +33,7 @@ public class AuthenticationServiceTest {
     private void shouldBeValid(String account, String password) {
         boolean actual = target.isValid(account, password);
         assertTrue(actual);
+        verify(notification, never()).sendNotify(anyString());
     }
 
     private void shouldBeInvalid(String account, String password) {
